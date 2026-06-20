@@ -4,9 +4,18 @@ import smtplib
 from datetime import timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from flask import Flask, redirect, render_template, request, session, url_for
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.utils import secure_filename
+from flask import Flask, redirect, render_template, request, session, url_for, flash
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+app = Flask(__name__)
+app.secret_key = 'bondhon_enterprise_kuola' # এটি গোপন রাখবেন
+app.permanent_session_lifetime = timedelta(days=30)
+
+# Firebase কানেকশন (serviceAccountKey.json ফাইলটি আপনার রিপোজিটরিতে থাকতে হবে)
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 app = Flask(__name__)
 app.secret_key = 'bondhon_enterprise_kuolaura_juri_fresh_start_key'
