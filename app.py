@@ -9,21 +9,14 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 app = Flask(__name__)
-app.secret_key = 'bondhon_enterprise_kuola' # এটি গোপন রাখবেন
+app.secret_key = 'bondhon_enterprise_kuola'
 app.permanent_session_lifetime = timedelta(days=30)
 
-# Firebase কানেকশন (serviceAccountKey.json ফাইলটি আপনার রিপোজিটরিতে থাকতে হবে)
+# Firebase কানেকশন
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-app = Flask(__name__)
-app.secret_key = 'bondhon_enterprise_kuolaura_juri_fresh_start_key'
-
-# সেশন পার্মানেন্ট এবং ৩০ দিনের জন্য লগইন ধরে রাখার কনফিগারেশন
-app.permanent_session_lifetime = timedelta(days=30)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bondhon_house_v4.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 db = SQLAlchemy(app)
